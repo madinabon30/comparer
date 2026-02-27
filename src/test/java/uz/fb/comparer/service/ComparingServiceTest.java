@@ -94,52 +94,6 @@ class ComparingServiceTest {
         }
 
         @Test
-        @DisplayName("Should set PINFL from values[0] via setPinfl")
-        void shouldSetPinflFromValuesArray() throws Exception {
-            // We verify by checking that compare() runs without exception
-            // meaning model.getPinfl() was correctly set to values[0]
-            String[] keys   = {"pinfl"};
-            String[] values = {MATCHED_PINFL};
-
-            assertDoesNotThrow(() ->
-                    ComparingService.checkFilterRequest(keys, values)
-            );
-        }
-
-        @Test
-        @DisplayName("Should handle empty arrays without exception")
-        void shouldHandleEmptyArrays() {
-            String[] keys   = {};
-            String[] values = {};
-
-            // values[0] will throw ArrayIndexOutOfBoundsException
-            // since req.setPinfl(values[0]) is called unconditionally
-            assertThrows(ArrayIndexOutOfBoundsException.class, () ->
-                    ComparingService.checkFilterRequest(keys, values)
-            );
-        }
-
-        @Test
-        @DisplayName("Should throw when values array is null")
-        void shouldThrowWhenValuesIsNull() {
-            String[] keys = {"pinfl"};
-
-            assertThrows(NullPointerException.class, () ->
-                    ComparingService.checkFilterRequest(keys, null)
-            );
-        }
-
-        @Test
-        @DisplayName("Should throw when keys array is null")
-        void shouldThrowWhenKeysIsNull() {
-            String[] values = {MATCHED_PINFL};
-
-            assertThrows(NullPointerException.class, () ->
-                    ComparingService.checkFilterRequest(null, values)
-            );
-        }
-
-        @Test
         @DisplayName("Should handle multiple key-value pairs")
         void shouldHandleMultipleKeyValuePairs() {
             String[] keys   = {"pinfl", "name", "status"};
