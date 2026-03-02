@@ -18,15 +18,15 @@ public class MetadataService {
     public List<Map<String, Object>> getViewColumns(String tableName, String columnName) {
         return jdbcTemplate.queryForList("""
                 SELECT
-                                             column_name,
-                                             data_type,
-                                             character_maximum_length,
-                                             numeric_precision
-                                         FROM information_schema.columns
-                                         WHERE
-                                             --table_schema = 'public' AND
-                                             table_name   = ? and column_name = ?
-                                         ORDER BY ordinal_position;
+                    COLUMN_NAME,
+                    DATA_TYPE,
+                    DATA_LENGTH
+                    FROM ALL_TAB_COLUMNS
+                    WHERE
+                      OWNER = 'IBS' 
+                      AND TABLE_NAME   = ? 
+                      and COLUMN_NAME = ?
+                ORDER BY COLUMN_ID;
             """, tableName, columnName);
     }
 }

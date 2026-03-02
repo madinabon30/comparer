@@ -23,9 +23,16 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.postgresql:postgresql'
+
+    // Oracle JDBC driver
+    implementation 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
+
+    // Optional — Oracle connection pool support
+    implementation 'com.oracle.database.jdbc:ucp:23.3.0.23.09'
+
+//    //POSTGRES
+//    implementation 'org.postgresql:postgresql'
 
     // LOMBOK
     implementation 'org.projectlombok:lombok:1.18.30'

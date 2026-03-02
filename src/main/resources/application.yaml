@@ -2,10 +2,10 @@ spring:
   application:
     name: comparer
   datasource:
-    url: jdbc:postgresql://localhost:5432/appdb
-    username: postgres
-    password: postgrespass
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:oracle:thin:@10.50.50.239:1521:devstage
+    username: ibs
+    password: ibs
+    driver-class-name: oracle.jdbc.OracleDriver
 
     hikari:
       maximum-pool-size: 10
