@@ -8,7 +8,5 @@ import uz.fb.comparer.service.ComparingService;
 public class ComparerMain {
     public static void main(String[] args) {
         SpringApplication.run(ComparerMain.class, args);
-//        ComparingService.checkFilterRequest("43112995540032");
-//        ComparingService.checkFilterRequest(new String[]{"pinfl"}, new String[]{"43112995540032"});
     }
 }

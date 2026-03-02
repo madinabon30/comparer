@@ -8,9 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class MetadataService {
     private final JdbcTemplate jdbcTemplate;
+
+    public MetadataService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<Map<String, Object>> getViewColumns(String tableName, String columnName) {
         return jdbcTemplate.queryForList("""
                 SELECT
