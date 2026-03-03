@@ -5,10 +5,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.jdbc.core.JdbcTemplate;
 import uz.fb.comparer.model.FilterDTO;
 import uz.fb.comparer.model.RequestDTO;
 import uz.fb.comparer.model.UserDetailsDTO;
+import uz.fb.comparer.repository.MetadataRepository;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -23,7 +23,7 @@ class ComparingServiceTest {
     private  MetadataService metadataService;
 
     @Mock
-    private JdbcTemplate jdbcTemplate;
+    private MetadataRepository metadataRepository;
 
     @InjectMocks
     private  ComparingService comparingService;
@@ -39,11 +39,9 @@ class ComparingServiceTest {
         private Method getHashedMethod;
 
         @BeforeEach
-        void setUp() throws NoSuchMethodException {
-            metadataService= new MetadataService(jdbcTemplate);
+        void setUp(){
+            metadataService= new MetadataService(metadataRepository);
             comparingService = new ComparingService(metadataService);
-            getHashedMethod = ComparingService.class.getDeclaredMethod("getHashed", String.class);
-            getHashedMethod.setAccessible(true);
         }
 
     // ─────────────────────────────────────────────────────────
@@ -81,7 +79,7 @@ class ComparingServiceTest {
     private RequestDTO getRequestSuccess(){
         return RequestDTO.builder()
                 .user(UserDetailsDTO.builder()
-                        .username("analytic")
+                        .userName("analytic")
                         .build())
                 .sessionName("10.50.70.88")
                 .viewName("CLIENT_PHYSICAL_CURRENT")
@@ -98,7 +96,7 @@ class ComparingServiceTest {
     private RequestDTO getRequestFail(){
         return RequestDTO.builder()
                 .user(UserDetailsDTO.builder()
-                        .username("analytic")
+                        .userName("analytic")
                         .build())
                 .sessionName("10.50.70.88")
                 .viewName("CLIENT_PHYSICAL_CURRENT")

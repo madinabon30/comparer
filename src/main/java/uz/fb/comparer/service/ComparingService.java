@@ -1,16 +1,20 @@
 package uz.fb.comparer.service;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import uz.fb.comparer.model.ObjectEntity;
 import uz.fb.comparer.model.RequestDTO;
 
+import java.math.BigDecimal;
 import java.util.*;
 
-@Slf4j
 @Service
 public class ComparingService {
 
     private final MetadataService metadataService;
+
+    private static final Logger log = LoggerFactory.getLogger(ComparingService.class);
 
     public ComparingService(MetadataService metadataService) {
         this.metadataService = metadataService;
@@ -47,10 +51,10 @@ public class ComparingService {
             boolean b;
         };
 
-            List<Map<String, Object>> viewColumns = metadataService.getViewColumns(viewName, columnName);
+            List<ObjectEntity> viewColumns = metadataService.getViewColumns(viewName, columnName);
             if (!viewColumns.isEmpty()) {
                   viewColumns.forEach(c -> {
-                     ref.b = c.get("DATA_TYPE").equals("NUMBER") ? c.get("DATA_PRECISION").equals(14) : c.get("DATA_TYPE").equals("VARCHAR2") && c.get("DATA_LENGTH").equals(14);
+                     ref.b = c.getDataType().equals("NUMBER") ? c.getDataPrecision().equals(new BigDecimal(14)) : c.getDataType().equals("VARCHAR2") && c.getDataLength().equals(new BigDecimal(14));
                  });
             }
 
